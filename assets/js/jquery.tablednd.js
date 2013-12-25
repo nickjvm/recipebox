@@ -78,6 +78,8 @@
  * Version 0.6: 2011-12-02 Added support for touch devices
  * Version 0.7  2012-04-09 Now works with jQuery 1.7 and supports touch, tidied up tabs and spaces
  */
+
+ 
 !function ($, window, document, undefined) {
 // Determine if this is a touch device
 var hasTouch   = 'ontouchstart' in document.documentElement,
@@ -253,7 +255,6 @@ window.jQuery.tableDnD = {
             });
     },
     currentOrder: function() {
-        console.log(this.currentTable.rows);
         var rows = this.currentTable.rows;
         return $.map(rows, function (val) {
             return ($(val).data('level') + val.id).replace(/\s/g, '');
@@ -535,7 +536,6 @@ window.jQuery.tableDnD = {
 
         this.dragObject = null;
         // Call the onDrop method if there is one
-        console.log(this.currentOrder());
         config.onDrop
             && this.originalOrder != this.currentOrder()
             && $(droppedRow).hide().fadeIn('fast')

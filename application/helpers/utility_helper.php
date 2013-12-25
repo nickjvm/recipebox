@@ -23,6 +23,22 @@ function recipe_image($size,$filename) {
 	}
 }
 
+function css($files) {
+	$output = "";
+	foreach ($files as $file) {
+		$output.="<link rel='stylesheet' href='".assetURL()."css/".$file.".css' type='text/css'/>\n";
+	}
+	print $output;
+}
+
+function js($files) {
+	$output = "";
+	foreach($files as $file) {
+		$output.="<script type='text/javascript' src='".assetURL()."js/".$file.".js'></script>\n";
+	}
+	print $output;
+}
+
 setlocale(LC_ALL, 'en_US.UTF8');
 
 
@@ -61,9 +77,12 @@ function slug_exists($slug) {
 
 function measurements() {
 	return array(
+		"" => "n/a",
 		"cup" => "Cup",
 		"tsp" => "Teaspoon",
 		"tbsp" => "Tablesppon",
 		"pinch" => "Pinch",
-		"oz"=>"Ounce");
+		"oz"=>"Ounce",
+		"can"=>"Can",
+		"package"=>"Package");
 }

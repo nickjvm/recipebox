@@ -5,7 +5,7 @@ class Recipes extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model('recipes_model');
+		$this->load->model(array('recipes_model','search_model'));
         $this->load->helper('url');
         $this->load->helper('form');
         $this->load->library('image_lib');
@@ -18,13 +18,28 @@ class Recipes extends CI_Controller {
 	}
 
 	public function view($slug) {
-		$data = $this->recipes_model->get_recipe($slug);
-		$this->load->view('recipes', $data);
-	}
 
-	public function edit($slug) {
 		$data = $this->recipes_model->get_recipe($slug);
+		if($data['title'] != null) {
+			$this->load->view('recipes', $data);
+		} else {
+			show_404();
+		}
+	}
+	public function add() {
+		$data['title'] = null;
+		$data['rid'] = -1;
+		$data['image'] = null;
+		$data['alias'] = null;
 		$this->load->view("admin/edit_recipe",$data);
+	}
+	public function edit($slug) {
+		if($this->tank_auth->is_logged_in()) {
+			$data = $this->recipes_model->get_recipe($slug);
+			$this->load->view("admin/edit_recipe",$data);
+		} else {
+			redirect('/auth/login?loc='.current_url(), 'location');
+		}
 	}
 	public function do_upload() {
 			$config['upload_path'] ="./assets/img/recipes";
@@ -107,26 +122,38 @@ class Recipes extends CI_Controller {
 			//$this->scale($new_source,$filename,$width,$height);
 		}
 	}
-	public function save($slug) {
-		if(($_FILES && $_FILES['userfile']['name'])) {
-			$file = $this->do_upload();
-		}
-		$data['post'] = $this->input->post();
-		$data['image'] = $file;
+	public function save($slug = NULL) {
+		if($slug != NULL) {
+			if(($_FILES && $_FILES['userfile']['name'])) {
+				$file = $this->do_upload();
+			}
+			$data['post'] = $this->input->post();
+			$data['image'] = $file;
 
-		if($this->input->post()) {
-			$save = $this->recipes_model->save_recipe($data,$slug);
+			if($this->input->post()) {
+				$save = $this->recipes_model->save_recipe($data,$slug);
+			}
+		} else {
+			$save = $this->recipes_model->save_recipe($data);
 		}
 		if($save) {
-			redirect("/recipes/".$slug);
+			redirect("/recipes/".$this->recipes_model->get_alias($slug));
 		}
 	}
 
+	public function delete($slug) {
+		$this->recipes_model->delete_recipe($slug);
+		redirect("/");
+	}
 	public function get() {
 		$rid = $this->input->post("rid");
 		
-		if($rid != NULL) {
+		if($rid != NULL && $rid > 0) {
 			print json_encode($this->recipes_model->get_recipe($rid));
-		} 
+		} else {
+			$data['ingredients'][] = array('id'=>0,"name"=>'','weight'=>0,'quantity'=>null,'measurement'=>'');
+			$data['directions'][] = array('id'=>0,"text"=>'','weight'=>0);
+			print json_encode($data);
+		}
 	}
 }

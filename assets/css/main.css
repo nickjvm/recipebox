@@ -6317,12 +6317,18 @@ td.small_buttons div button:last-child {
   -moz-border-radius-bottomright: 4px;
   -moz-border-radius-topright: 4px;
 }
+body {
+  background: #f0eeec;
+}
+body.navbar-thin {
+  padding-top: 70px;
+}
 .directions {
   margin-top: 1em;
 }
 .directions textarea {
   vertical-align: top;
-  width: 500px;
+  max-width: 99%;
   height: 50px;
   margin-right: 5px;
 }
@@ -6332,15 +6338,57 @@ td.small_buttons div button:last-child {
 .directions li {
   margin-bottom: 10px;
 }
-.sortable {
-  margin-left: -27px;
+.hero {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 400px;
+  overflow: hidden;
+  margin-top: -200px;
+}
+.force-small {
+  width: 1%;
 }
 .ingredients td {
   padding: 5px 5px 5px 0;
 }
+.recipe-overview {
+  overflow: hidden;
+  margin-bottom: 1em;
+}
 input[type=text].short {
-  width: 45px;
+  width: 55px;
   text-align: center;
+}
+.group {
+  margin-bottom: 1em;
+}
+.group h3 {
+  margin-top: 0;
+}
+.thumbnail.recipe-thumbnail {
+  text-align: left;
+  margin-bottom: 1em;
+}
+.thumbnail.recipe-thumbnail a {
+  display: block;
+}
+.thumbnail.recipe-thumbnail a > img {
+  vertical-align: top;
+  display: inline-block;
+  margin-right: 5%;
+  max-width: 30%;
+}
+.thumbnail.recipe-thumbnail .recipe-title {
+  display: inline-block;
+  max-width: 64%;
+}
+.amount {
+  display: inline-block;
+  min-width: 75px;
+  text-align: right;
+  margin-right: 15px;
 }
 img {
   max-width: 100%;
@@ -6354,4 +6402,57 @@ h2 {
 }
 .buttons li {
   display: inline-block;
+}
+#search-container {
+  margin: 3em 0 2em 0;
+  /*position:absolute;
+	text-align:center;
+	top:50%;
+	height:200px;
+	margin-top:-100px;
+	left:0;
+	right:0;*/
+
+}
+.navbar-left {
+  background: #f2b66d;
+}
+.navbar-left .navbar-brand {
+  color: #FFF;
+}
+.navbar-left #search-container {
+  margin: 0;
+}
+.sidebar-right {
+  border-left: 1px solid #d9d4d0;
+}
+.main-content {
+  border-right: 1px solid #d9d4d0;
+  margin-right: -1px;
+}
+.thin-search {
+  max-width: 50%;
+}
+.nav.nav-tabs {
+  margin: 1em;
+}
+.latest {
+  text-align: left;
+}
+.recipes-thumb-list {
+  padding: 0;
+  text-align: center;
+}
+.recipes-thumb-list li {
+  text-align: left;
+  display: inline-block;
+  width: 31%;
+  vertical-align: top;
+  margin-right: 2%;
+}
+.recipes-thumb-list li:last-child {
+  margin-right: 0;
+}
+.recipes-thumb-list li img {
+  margin-bottom: 0.3em;
 }

@@ -23,11 +23,13 @@ function RecipesViewModel(data) {
 		$(".ingredients tr:last-child").find(".short").focus();
 	}
 	self.AddDirection = function() {
+		var rand = Math.random() * 100
 		self.Directions.push({
-			id:Math.random() * 100,
-			text:"",
+			id:rand,
+			text:'',
 			weight:self.Directions().length + 1
 		});
+		$(".directions tr:last-child").find("textarea").focus();
 	}
 	self.RemoveIngredient = function(id) {
 		self.Ingredients.remove(function(item) { return item.id == id });

@@ -24,7 +24,10 @@ class Search extends CI_Controller {
 			$data['terms'] = urldecode($search);
 		}
 		$data['results'] = $this->search_model->get_results($data['terms']);
-
+		if(count($data['results']) == 1) {
+			redirect("recipes/".$data['results'][0]->alias);
+		}
+		$data['latest'] = $this->search_model->get_latest();
 		$this->load->view("search",$data);
 		
 	}

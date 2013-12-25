@@ -1,11 +1,23 @@
 @import "bootstrap";
 @import "tablednd";
 
+@gray: lighten(#D9D4D0,10%);
+@deepOrange: #D86F33;
+@freshOrange:#F2B66D;
+@tan: #F2E0C9;
+@freshGreen:#99B075;
+
+body {
+	background:@gray;
+	&.navbar-thin {
+		padding-top:70px;
+	}
+}
 .directions {
 	margin-top:1em;
 	textarea {
 		vertical-align:top;
-		width:500px;
+		max-width:99%;
 		height:50px;
 		margin-right:5px;
 	}
@@ -16,20 +28,64 @@
 		margin-bottom:10px;
 	}
 }
-.sortable {
-	margin-left:-27px;
+.hero {
+	position: absolute;
+left: 0;
+right: 0;
+top: 50%;
+height: 400px;
+overflow: hidden;
+margin-top: -200px;
+}
+.force-small {
+	width:1%;
 }
 .ingredients {
 	td {
 		padding:5px 5px 5px 0;
 	}
 }
+.recipe-overview {
+	overflow:hidden;
+	margin-bottom:1em;
+}
 input[type=text] {
 	&.short {
-		width:45px;
+		width:55px;
 		text-align:center;
 	}
 } 
+.group {
+	margin-bottom:1em;
+	h3 {
+		margin-top:0;
+	}
+}
+.thumbnail.recipe-thumbnail {
+	text-align:left;
+	margin-bottom:1em;
+	a {
+		display:block;
+		> img {
+			vertical-align:top;
+			display:inline-block;
+			margin-right:5%;
+			max-width:30%;
+		}
+	}
+	
+		
+	.recipe-title {
+		display:inline-block;
+		max-width:64%;
+	}
+}
+.amount {
+	display:inline-block;
+	min-width:75px;
+	text-align:right;
+	margin-right:15px;
+}
 img {
 	max-width:100%;
 }
@@ -43,5 +99,62 @@ h2 {
 	padding-left:0;
 	li {
 		display:inline-block;
+	}
+}
+
+#search-container {
+	margin:3em 0 2em 0;
+	/*position:absolute;
+	text-align:center;
+	top:50%;
+	height:200px;
+	margin-top:-100px;
+	left:0;
+	right:0;*/
+
+}
+.navbar-left {
+	.navbar-brand {
+		color:#FFF;
+	}
+	background:@freshOrange;
+	#search-container {
+		margin:0;
+	}
+}
+.sidebar-right {
+	border-left:1px solid darken(@gray,10%);
+}
+.main-content {
+	border-right:1px solid darken(@gray,10%);
+	margin-right:-1px;
+}
+.thin-search {
+	max-width:50%;
+}
+.nav.nav-tabs {
+	margin:1em;
+}
+.container {
+	//background:#FFF;
+}
+.latest {
+	text-align:left;
+}
+.recipes-thumb-list {
+	padding:0;
+	text-align:center;
+	li {
+		text-align:left;
+		display:inline-block;
+		width:31%;
+		vertical-align:top;
+		margin-right:2%;
+		&:last-child {
+			margin-right:0;
+		}
+		img {
+			margin-bottom:.3em
+		}
 	}
 }
